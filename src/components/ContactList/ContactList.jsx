@@ -3,16 +3,15 @@ import ContactItem from "./ContactItem";
 import s from "./contactList.module.css";
 
 const ContactList = ({ items, onClick }) => {
-  
-  const elements = items.map((el) => {
-    const { number, name, id } = el;
+
+  const elements = items.map(({ number, name, id }) => {
     return (
       <ContactItem
         key={id}
         id={id}
         onClick={onClick}
-        number={number}
         name={name}
+        number={number}
       />
     );
   });

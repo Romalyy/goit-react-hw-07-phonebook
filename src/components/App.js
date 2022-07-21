@@ -26,23 +26,23 @@ const App = () => {
     dispatch(fetchContacts());
   }, [dispatch]);
 
-  const onAddPhone = useCallback(
-    (obj) => dispatch(addContact(obj)),
+  const onAdd = useCallback(
+    (el) => dispatch(addContact(el)),
     [dispatch]
   );
-  const onRemovePhone = useCallback(
+  const onRemove = useCallback(
     (id) => {
       dispatch(removeContact(id));
     },
     [dispatch]
   );
 
-  const changeFilterState = useCallback(
+  const changeFilter = useCallback(
     ({ target: { value } }) => setFilter(value.trim()),
     [setFilter]
   );
 
-    const filteredItems = () => {
+    const getVisibleContacts = () => {
     if (!filter) {
       return items;
     }
@@ -50,19 +50,20 @@ const App = () => {
       const { name } = e;
       return name.toLowerCase().includes(filter.toLowerCase());
     });
-  };
+    };
+  
+  const visibleContacts = getVisibleContacts();
 
   return (
     <div className={s.container}>
       <h1 className={s.title}>Phonebook</h1>
-      <ContactForm onSubmit={onAddPhone} />
-
+      <ContactForm onSubmit={onAdd} />
       <h2 className={s.title}>Contacts</h2>
-      <Filter onChange={changeFilterState} />
+      <Filter onChange={changeFilter} />
       {loading && <p>Loading...</p>}
       {error && <p>Такого контакта нет!</p>}
       {items.length > 0 && !error && !loading && (
-        <ContactList items={filteredItems()} onClick={onRemovePhone} />
+      <ContactList items={visibleContacts} onClick={onRemove} />
       )}
     </div>
   );
