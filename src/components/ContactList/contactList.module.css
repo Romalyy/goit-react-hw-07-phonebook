@@ -1,0 +1,19 @@
+.container {
+  width: 500px;
+  padding: 50px 30px;
+  margin: 50px auto;
+  border-radius: 25px;
+  /* background-color: #FDF4E3; */
+  background-color: whitesmoke;
+}
+
+.title {
+  text-align: center;
+  margin: 0;
+  margin-bottom: 20px;
+}
+
+.list {
+  padding: 0;
+  width: 500px;
+}
